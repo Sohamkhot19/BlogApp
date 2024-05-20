@@ -1,6 +1,32 @@
 import React from 'react'
-
+import axios from 'axios';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 function Login() {
+  const [formData, setFormData] = useState({
+    username: '',
+    password: ''
+  });
+  const navigate=useNavigate();
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post('http://localhost:5000/login', formData);
+      // Assuming the backend responds with a success message upon successful login
+      console.log(response.data);
+      // Redirect to home page upon successful login
+      navigate('/Home',{state:{username:formData.username}})
+    } catch (error) {
+      console.error('Login failed:', error);
+      // Display error message or handle failed login
+      // You can set state here to display error message to the user
+    }
+  };
   return (
     <>
     <section className="vh-100" style={{backgroundColor:'#3C5B6F'}}>
@@ -16,7 +42,7 @@ function Login() {
             <div className="col-md-6 col-lg-7 d-flex align-items-center">
               <div className="card-body p-4 p-lg-5 text-black">
 
-                <form>
+                <form onSubmit={handleLogin}>
 
                   <div className="d-flex align-items-center mb-5 pb-1">
                     <img src="../logo.png" alt="" height={48} width={48}/>
@@ -26,23 +52,23 @@ function Login() {
                   <h5 className="fw-normal mb-3 pb-3" style={{letterSpacing:'1px',fontSize:'25px'}}>Sign into your account</h5>
 
                   <div data-mdb-input-init className="form-outline mb-4">
-                    <input type="text" id="form2Example17" className="form-control form-control-lg" placeholder='Username' />
+                    <input type="text" name='username' onChange={handleChange} id="form2Example17" className="form-control form-control-lg" placeholder='Username' />
 
                   </div>
 
                   <div data-mdb-input-init className="form-outline mb-4">
-                    <input type="password" id="form2Example27" className="form-control form-control-lg" placeholder='Password' />
+                    <input type="password" name='password' onChange={handleChange} id="form2Example27" className="form-control form-control-lg" placeholder='Password' />
 
                   </div>
 
                   <div className="pt-1 mb-4 d-grid">
-                    <button data-mdb-button-init data-mdb-ripple-init className="btn btn-dark btn-lg btn-block" type="button">Login</button>
+                    <button data-mdb-button-init data-mdb-ripple-init className="btn btn-dark btn-lg btn-block" type="submit">Login</button>
                   </div>
 
-                  <a className="text-muted" style={{textDecoration:'none',fontSize:'18px'}} href="#">Forgot password?</a>
-                  <p className="mb-5 pb-lg-2" style={{color:'#151515',fontSize:'19px',}}>Don't have an account? <a href="./Register.js"
+                  <a className="text-muted" style={{textDecoration:'none',fontSize:'18px'}} href="/">Forgot password?</a>
+                  <p className="mb-5 pb-lg-2" style={{color:'#151515',fontSize:'19px',}}>Don't have an account? <a href="/Register"
                       style={{color:'#0E46A3',textDecoration:'none',fontSize:'19px'}}>Register here</a></p>
-                  <a href="#" className="text-muted no-underline" style={{textDecoration:'none',fontSize:'18px'}}>Terms of use.</a>
+                  <a href="/" className="text-muted no-underline" style={{textDecoration:'none',fontSize:'18px'}}>Terms of use.</a>
                   <a href="#!" className="extra-large text-muted" style={{textDecoration:'none',fontSize:'18px'}}>Privacy policy</a>
                 </form>
 

@@ -1,25 +1,29 @@
+
+
+
 .background-radial-gradient {
-    background-color: hsl(218, 41%, 15%);
-    background-image: radial-gradient(650px circle at 0% 0%,
-        hsl(218, 41%, 35%) 15%,
-        hsl(218, 41%, 30%) 35%,
-        hsl(218, 41%, 20%) 75%,
-        hsl(218, 41%, 19%) 80%,
-        transparent 100%),
-      radial-gradient(1250px circle at 100% 100%,
-        hsl(218, 41%, 45%) 15%,
-        hsl(218, 41%, 30%) 35%,
-        hsl(218, 41%, 20%) 75%,
-        hsl(218, 41%, 19%) 80%,
-        transparent 100%);
+  background-color: hsl(207, 29%, 31%);
+  /* Radial gradient adjustments */
+  background-image: radial-gradient(650px circle at 0% 0%,
+      hsl(207, 28%, 45%) 15%,   /* lighter shade */
+      hsl(207, 29%, 41%) 35%,   /* slightly darker */
+      hsl(207, 30%, 26%) 75%,   /* base color */
+      hsl(208, 28%, 18%) 80%,   /* slightly darker */
+      transparent 100%),
+    radial-gradient(1250px circle at 100% 100%,
+      hsl(207, 29%, 51%) 15%,   /* lighter shade */
+      hsl(207, 29%, 41%) 35%,   /* slightly darker */
+      hsl(207, 30%, 26%) 75%,   /* base color */
+      hsl(208, 28%, 18%) 80%,   /* slightly darker */
+      transparent 100%);
   }
 
-  #radius-shape-1 {
+  /* #radius-shape-1 {
     height: 220px;
     width: 220px;
     top: -60px;
     left: -130px;
-    background: radial-gradient(#44006b, #ad1fff);
+    background: radial-gradient(#250483, #720ad4);
     overflow: hidden;
   }
 
@@ -39,7 +43,7 @@
     left: -120px;
     background: radial-gradient(#44006b, #1fffbc);
     overflow: hidden;
-  }
+  } */
   .bg-glass {
     background-color: hsla(0, 0%, 100%, 0.952) !important;
     backdrop-filter: saturate(200%) blur(25px);
