@@ -1,6 +1,9 @@
+//createblog.js
 import React, { useState } from 'react';
 import Navbar from './Navbar';
+import { useSelector } from 'react-redux';
 import axios from 'axios';
+import useUsername from '../useusername';
 
 function Createblog() {
   const [formData, setFormData] = useState({
@@ -9,8 +12,12 @@ function Createblog() {
     content: '',
     thumbnail: '../defaultimg.webp',
   });
+  
   const [thumbnailPreview, setThumbnailPreview] = useState('../defaultimg.webp');
+  const username=useUsername();
 
+  // const isLoggedIn = useSelector(state => state.session.isLoggedIn);
+  // const user = useSelector(state => state.session.user);
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({...formData,[name]: value,});
@@ -29,8 +36,14 @@ function Createblog() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!username) {
+      console.error('User is not logged in');
+      alert('User is not logged in');
+      return;
+    }
     const data = new FormData();
     data.append('title', formData.title);
+    data.append('username', username);
     data.append('category', formData.category);
     data.append('content', formData.content);
     if (formData.thumbnail) {
@@ -53,6 +66,7 @@ function Createblog() {
   return (
     <>
       <Navbar />
+      <h1>hello {username}</h1>
       <div className="container mt-4">
         <form onSubmit={handleSubmit}>
           <div className="text-center mb-4">

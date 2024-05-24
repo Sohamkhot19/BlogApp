@@ -23,7 +23,7 @@ function Register() {
     try {
       const response = await axios.post('http://localhost:5000/signup', formData);
       console.log(response.data);
-      window.location.href = '/Login';
+      window.location.href = '/';
     } catch (error) {
       console.error('Failed to create user:', error);
     }

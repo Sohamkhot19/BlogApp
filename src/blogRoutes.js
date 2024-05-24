@@ -27,7 +27,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 router.post('/blogs', upload.single('thumbnail'), async (req, res) => {
-  const { title, category, content } = req.body;
+  const { title, category, content,username } = req.body;
   const thumbnail = req.file ? `/uploads/${req.file.filename}` : '../defaultimg.webp';
 
   console.log('Request Body:', req.body);
@@ -35,6 +35,7 @@ router.post('/blogs', upload.single('thumbnail'), async (req, res) => {
 
   const newBlog = {
     title,
+    username,
     category,
     content,
     thumbnail,

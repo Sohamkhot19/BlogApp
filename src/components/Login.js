@@ -2,11 +2,15 @@ import React from 'react'
 import axios from 'axios';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { login } from '../actions/sessionActions';
+
 function Login() {
   const [formData, setFormData] = useState({
     username: '',
     password: ''
   });
+  const dispatch=useDispatch();
   const navigate=useNavigate();
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -17,16 +21,16 @@ function Login() {
     e.preventDefault();
     try {
       const response = await axios.post('http://localhost:5000/login', formData);
-      // Assuming the backend responds with a success message upon successful login
       console.log(response.data);
-      // Redirect to home page upon successful login
-      navigate('/Home',{state:{username:formData.username}})
+      sessionStorage.setItem('username', formData.username);
+      console.log('Stored username:', sessionStorage.getItem('username')); // Check storage
+      dispatch(login({ username: formData.username }));
+      navigate('/Home');
     } catch (error) {
       console.error('Login failed:', error);
-      // Display error message or handle failed login
-      // You can set state here to display error message to the user
     }
   };
+  
   return (
     <>
     <section className="vh-100" style={{backgroundColor:'#3C5B6F'}}>

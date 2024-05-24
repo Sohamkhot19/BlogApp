@@ -1,7 +1,9 @@
 import React from 'react'
 import Navbar from './Navbar'
+import useUsername from '../useusername'
 
 function Blogdetail() {
+  const username=useUsername();
   return (
     <>
     <Navbar/>
@@ -9,7 +11,7 @@ function Blogdetail() {
 
           <div className="text-center mb-4">
             <img src='../defaultimg.webp' alt="Thumbnail" className="img-fluid" width="650px" />
-            <h1 className='mt-4'>this is title of blog</h1>
+            <h1 className='mt-4'>this is title of blog by {username}</h1>
 
             
           </div>

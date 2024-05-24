@@ -1,6 +1,14 @@
 import React from 'react'
+import { Link, useNavigate } from 'react-router-dom';
 
 function Navbar() {
+  const navigate = useNavigate();
+  const handlelogout=()=>{
+    // Clear session data
+    sessionStorage.removeItem('username');
+    // Redirect to login page
+    navigate('/');
+  }
   return (
     <>
     <nav className="navbar navbar-expand-lg bg-light" style={{ backgroundColor: '#3C5B6F' }}>
@@ -24,10 +32,11 @@ function Navbar() {
                 <a className="nav-link" href="#">About</a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" aria-disabled="true">Logout</a>
+                <a className="nav-link" onClick={handlelogout} aria-disabled="true">Logout</a>
               </li>
             </ul>
           </div>
+          <img src="../blogimg.webp" alt="" width='50px' height='50px' style={{borderRadius:'50%'}}/>
         </div>
       </nav>
     </>
