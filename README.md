@@ -1,2 +1,2 @@
 # BlogApp
- simple blog application
+ blog application using MERN 
