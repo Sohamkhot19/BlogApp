@@ -4,6 +4,7 @@ const cors = require('cors');
 const { MongoClient } = require('mongodb');
 const path = require('path');
 const blogRoutes = require('./blogRoutes'); // Import the blog routes
+const commentRoutes = require('./commentroutes'); // Import your commentRoutes.js file
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -82,6 +83,8 @@ app.use('/api', (req, res, next) => {
 // Serve static files from the uploads directory
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
+app.use('/api/comments', commentRoutes);
+
 // Cleanup MongoDB connection on process exit
 process.on('SIGINT', () => {
   console.log('Closing MongoDB connection...');
@@ -91,6 +94,8 @@ process.on('SIGINT', () => {
   }
   process.exit(0);
 });
+
+
 
 // Start the server
 app.listen(PORT, () => {

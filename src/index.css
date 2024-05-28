@@ -1,0 +1,43 @@
+body{
+    /* background: linear-gradient(to right, #018e9e, #00CDAC); */
+    color: white;
+    /* font-family:Arial, Helvetica, sans-serif; */
+    background-color: hsl(207, 29%, 31%);
+    /* Radial gradient adjustments */
+    background-image: radial-gradient(650px circle at 0% 0%,
+        hsl(207, 28%, 45%) 15%,   /* lighter shade */
+        hsl(207, 29%, 41%) 35%,   /* slightly darker */
+        hsl(207, 30%, 26%) 75%,   /* base color */
+        hsl(208, 28%, 18%) 80%,   /* slightly darker */
+        transparent 100%),
+      radial-gradient(1250px circle at 100% 100%,
+        hsl(207, 29%, 51%) 15%,   /* lighter shade */
+        hsl(207, 29%, 41%) 35%,   /* slightly darker */
+        hsl(207, 30%, 26%) 75%,   /* base color */
+        hsl(208, 28%, 18%) 80%,   /* slightly darker */
+        transparent 100%);
+}
+.background-radial-gradient {
+    background-color: hsl(207, 29%, 31%);
+    /* Radial gradient adjustments */
+    background-image: radial-gradient(650px circle at 0% 0%,
+        hsl(207, 28%, 45%) 15%,   /* lighter shade */
+        hsl(207, 29%, 41%) 35%,   /* slightly darker */
+        hsl(207, 30%, 26%) 75%,   /* base color */
+        hsl(208, 28%, 18%) 80%,   /* slightly darker */
+        transparent 100%),
+      radial-gradient(1250px circle at 100% 100%,
+        hsl(207, 29%, 51%) 15%,   /* lighter shade */
+        hsl(207, 29%, 41%) 35%,   /* slightly darker */
+        hsl(207, 30%, 26%) 75%,   /* base color */
+        hsl(208, 28%, 18%) 80%,   /* slightly darker */
+        transparent 100%);
+    }
+
+    .bg-glass {
+        background-color: hsla(0, 0%, 100%, 0.952) !important;
+        backdrop-filter: saturate(200%) blur(25px);
+      }
+      ::placeholder {
+        color: white;
+      }

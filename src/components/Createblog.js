@@ -1,9 +1,8 @@
-//createblog.js
 import React, { useState } from 'react';
 import Navbar from './Navbar';
-import { useSelector } from 'react-redux';
 import axios from 'axios';
 import useUsername from '../useusername';
+import './Createblog.css';
 
 function Createblog() {
   const [formData, setFormData] = useState({
@@ -12,15 +11,13 @@ function Createblog() {
     content: '',
     thumbnail: '../defaultimg.webp',
   });
-  
-  const [thumbnailPreview, setThumbnailPreview] = useState('../defaultimg.webp');
-  const username=useUsername();
 
-  // const isLoggedIn = useSelector(state => state.session.isLoggedIn);
-  // const user = useSelector(state => state.session.user);
+  const [thumbnailPreview, setThumbnailPreview] = useState('../defaultimg.webp');
+  const username = useUsername();
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData({...formData,[name]: value,});
+    setFormData({ ...formData, [name]: value });
   };
 
   const handleThumbnailChange = (e) => {
@@ -31,6 +28,12 @@ function Createblog() {
         thumbnail: file,
       });
       setThumbnailPreview(URL.createObjectURL(file));
+    } else {
+      setFormData({
+        ...formData,
+        thumbnail: '../defaultimg.webp',
+      });
+      setThumbnailPreview('../defaultimg.webp');
     }
   };
 
@@ -41,14 +44,13 @@ function Createblog() {
       alert('User is not logged in');
       return;
     }
+
     const data = new FormData();
     data.append('title', formData.title);
     data.append('username', username);
     data.append('category', formData.category);
     data.append('content', formData.content);
-    if (formData.thumbnail) {
-      data.append('thumbnail', formData.thumbnail);
-    }
+    data.append('thumbnail', formData.thumbnail);
 
     try {
       const response = await axios.post('http://localhost:5000/api/blogs', data, {
@@ -66,7 +68,6 @@ function Createblog() {
   return (
     <>
       <Navbar />
-      <h1>hello {username}</h1>
       <div className="container mt-4">
         <form onSubmit={handleSubmit}>
           <div className="text-center mb-4">
@@ -74,22 +75,23 @@ function Createblog() {
           </div>
 
           <div className="input-group mb-3 my-4 w-100">
-            <span className="input-group-text" id="inputGroup-sizing-default">Title</span>
+            <span className="input-group-text" id="inputGroup-sizing-default" style={{background:'#003285', color:'white'}}>Title</span>
             <input 
               type="text" 
-              className="form-control" 
+              className="form-control white-placeholder" 
               aria-label="Sizing example input" 
               aria-describedby="inputGroup-sizing-default" 
               placeholder="Enter blog title"
               name="title"
               value={formData.title}
               onChange={handleInputChange}
+              style={{backgroundColor:'transparent',color:'white'}}
             />
           </div>
 
           <div className="d-flex justify-content-between align-items-center mb-4">
             <input type="file" onChange={handleThumbnailChange} style={{ display: 'none' }} id="thumbnailInput" />
-            <label htmlFor="thumbnailInput" className="btn btn-outline-primary d-flex align-items-center p-2" style={{ fontSize: '12px', backgroundColor: '#7AB2B2', borderRadius: '25%' }}>
+            <label htmlFor="thumbnailInput" className="btn btn-outline-primary d-flex align-items-center p-2" style={{ fontSize: '12px', color:'white',backgroundColor: '#003285', borderRadius: '25%' }}>
               <i className="bi bi-camera" style={{ fontSize: '25px' }}></i>
             </label>
 
@@ -99,31 +101,39 @@ function Createblog() {
               name="category"
               value={formData.category}
               onChange={handleInputChange}
-              style={{ padding: '10px', fontSize: '16px' }}
+              style={{ padding: '10px', fontSize: '16px',backgroundColor:'transparent',color:'white' }}
             >
-              <option value="" disabled>Select Blog Category</option>
-              <option value="music">Music</option>
-              <option value="movie">Movie</option>
-              <option value="technical">Technical</option>
-              <option value="fashion">Fashion</option>
+              <option value="" disabled  style={{backgroundColor:'transparent',color:'black'}}>Select Blog Category</option>
+              <option value="music" style={{backgroundColor:'transparent',color:'black'}}>Music</option>
+              <option value="movie" style={{backgroundColor:'transparent',color:'black'}}>Movie</option>
+              <option value="technical" style={{backgroundColor:'transparent',color:'black'}}>Technical</option>
+              <option value="fashion" style={{backgroundColor:'transparent',color:'black'}}>Fashion</option>
+              <option value="business" style={{backgroundColor:'transparent',color:'black'}}>Business</option>
+              <option value="travel" style={{backgroundColor:'transparent',color:'black'}}>Travel</option>
+              <option value="fitness" style={{backgroundColor:'transparent',color:'black'}}>Fitness</option>
+              <option value="food" style={{backgroundColor:'transparent',color:'black'}}>Food</option>
+              <option value="sports" style={{backgroundColor:'transparent',color:'black'}}>Sports</option>
+              <option value="finance" style={{backgroundColor:'transparent',color:'black'}}>Finance</option>
+              <option value="personal" style={{backgroundColor:'transparent',color:'black'}}>Personal</option>
+              <option value="political" style={{backgroundColor:'transparent',color:'black'}}>Political</option>
             </select>
 
             <button 
               type="submit"
               className="btn btn-primary"
-              style={{ padding: '10px 20px', fontSize: '16px', borderRadius: '10px', backgroundColor: '#7AB2B2' }}
+              style={{ padding: '10px 20px', fontSize: '16px', borderRadius: '10px', backgroundColor: '#003285' }}
             >
               Publish
             </button>
           </div>
 
           <textarea
-            className="form-control"
+            className="form-control white-placeholder"
             placeholder="Write your blog here..."
             name="content"
             value={formData.content}
             onChange={handleInputChange}
-            style={{ height: '300px', padding: '10px', fontSize: '16px', marginBottom: '14px' }}
+            style={{ height: '300px', padding: '10px', fontSize: '16px', marginBottom: '14px',backgroundColor:'transparent',color:'white','::placeholder':{color:'white'} }}
           />
         </form>
       </div>
